@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TextViewCellDelagate {
-    func textFrom(text: String)
+    func textFrom(text: String, cell: EditTableViewCell)
 }
 
 class EditTableViewCell: UITableViewCell {
@@ -22,8 +22,8 @@ class EditTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
         cellSetup()
-        
         userTextField.addTarget(self, action: #selector(sendMessage), for: .allEditingEvents)
     }
     
@@ -41,7 +41,12 @@ class EditTableViewCell: UITableViewCell {
     }
     
     @objc func sendMessage(textField: UITextField) {
-        delagate?.textFrom(text: textField.text!)
+        delagate?.textFrom(text: textField.text!, cell: self)
+    }
+    
+    func inputs(name: String, textInput: String) {
+        label.text = name
+        userTextField.text = textInput
     }
     
     required init?(coder aDecoder: NSCoder) {

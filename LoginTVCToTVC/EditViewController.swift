@@ -10,30 +10,39 @@ import UIKit
 
 class EditViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let viewModel = ViewModelVC()
+    let viewModel = ViewModelEVC()
+    let buttonBack = UIButton()
+    var sendTextClosure: ((String, String) -> Void)?
+    
+    var delegate: ViewControlledTaskDelegate?
     
     let tableView = UITableView()
     private let cellID = "cellIDE"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
+        view.addSubview(buttonBack)
+        
         settingsTableView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonAction))
+        buttonBack.frame = CGRect(x: view.frame.width / 2 - 50, y: 385, width: 100, height: 20)
+        buttonBack.setTitle("Save", for: .normal)
+        buttonBack.setTitleColor(.blue, for: .normal)
+        // used for navigationController variant
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonAction))
+        
+        buttonBack.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
     }
     
     func settingsTableView() {
-        
+        view.addSubview(tableView)
+        tableView.frame = CGRect(x: 25, y: 250, width: 350, height: 100)
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(EditTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.isScrollEnabled = false
-        
-        view.addSubview(tableView)
-        tableView.frame = CGRect(x: 25, y: 250, width: 350, height: 100)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,46 +54,36 @@ class EditViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell?.delagate = self
         
         if indexPath.row == 0 {
-            cell!.userTextField.text = "\(viewModel.profile!.userText)"
-            cell!.label.text = "User name:"
+            cell!.inputs(name: "User name:", textInput: "")
         } else {
-            cell!.userTextField.text = "\(viewModel.profile!.passwordText)"
-            cell!.label.text = "Password"
+            cell!.inputs(name: "Password:", textInput: "")
         }
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     @objc func saveButtonAction() {
+        // MARK: - Closure
+//        sendTextClosure?(viewModel.profile!.userText, viewModel.profile!.passwordText)
         
-//        let indexPath = tableView(tableView(<#T##tableView: UITableView##UITableView#>, numberOfRowsInSection: <#T##Int#>)
-//
-////        let indexPath = tableView.indexPath(for: EditTableViewCell())
-//        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath!) as? EditTableViewCell
-//
-//        if indexPath?.row == 0 {
-//            viewModel.profile?.userText = (cell?.userTextField.text)!
-//        } else {
-//            viewModel.profile?.passwordText = (cell?.userTextField.text!)!
-        }
-    
-    func indexPath(for cell: EditTableViewCell) -> IndexPath? {
+        // MARK: - Delegate
+        delegate?.sendTask(userName: viewModel.profile!.userText, password: viewModel.profile!.passwordText)
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditViewController: TextViewCellDelagate {
+    func textFrom(text: String, cell: EditTableViewCell) {
         
-    }
-    }
-    
-    extension EditViewController: TextViewCellDelagate {
-        func textFrom(text: String) {
-            print(text)
-            
-            indexPath(for: EditTableViewCell)
-            
-            tableView.cell
-            
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        if indexPath.row == 0 {
+            viewModel.profile?.userText = text
+            viewModel.observer = text.count
+            cell.userTextField.textColor = viewModel.isValid ? #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1) : .black
+        } else {
+            viewModel.profile?.passwordText = text
+            viewModel.observer = text.count
+            cell.userTextField.textColor = viewModel.isValid ? #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1) : .black
         }
+    }
 }
 

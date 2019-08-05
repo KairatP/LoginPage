@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8410586522DB128000A7A44C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410586422DB128000A7A44C /* AppDelegate.swift */; };
 		8410586722DB128000A7A44C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410586622DB128000A7A44C /* ViewController.swift */; };
-		8410586A22DB128000A7A44C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8410586822DB128000A7A44C /* Main.storyboard */; };
 		8410586D22DB128000A7A44C /* LoginTVCToTVC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8410586B22DB128000A7A44C /* LoginTVCToTVC.xcdatamodeld */; };
 		8410586F22DB128000A7A44C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8410586E22DB128000A7A44C /* Assets.xcassets */; };
 		8410587222DB128000A7A44C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8410587022DB128000A7A44C /* LaunchScreen.storyboard */; };
@@ -18,13 +17,13 @@
 		8410587E22DB469400A7A44C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410587D22DB469400A7A44C /* Profile.swift */; };
 		8410588222DB474900A7A44C /* ViewModelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410588122DB474900A7A44C /* ViewModelVC.swift */; };
 		8410588422DB515B00A7A44C /* EditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410588322DB515B00A7A44C /* EditTableViewCell.swift */; };
+		84151EC622E443C500AD89CF /* ViewModelEVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84151EC522E443C500AD89CF /* ViewModelEVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8410586122DB128000A7A44C /* LoginTVCToTVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginTVCToTVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8410586422DB128000A7A44C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8410586622DB128000A7A44C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8410586922DB128000A7A44C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8410586C22DB128000A7A44C /* LoginTVCToTVC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginTVCToTVC.xcdatamodel; sourceTree = "<group>"; };
 		8410586E22DB128000A7A44C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8410587122DB128000A7A44C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,6 +33,7 @@
 		8410587D22DB469400A7A44C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		8410588122DB474900A7A44C /* ViewModelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelVC.swift; sourceTree = "<group>"; };
 		8410588322DB515B00A7A44C /* EditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewCell.swift; sourceTree = "<group>"; };
+		84151EC522E443C500AD89CF /* ViewModelEVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelEVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,6 @@
 				8410587B22DB17F600A7A44C /* TableViewCell.swift */,
 				8410587922DB12AF00A7A44C /* EditViewController.swift */,
 				8410588322DB515B00A7A44C /* EditTableViewCell.swift */,
-				8410586822DB128000A7A44C /* Main.storyboard */,
 				8410586E22DB128000A7A44C /* Assets.xcassets */,
 				8410587022DB128000A7A44C /* LaunchScreen.storyboard */,
 				8410587322DB128100A7A44C /* Info.plist */,
@@ -94,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				8410588122DB474900A7A44C /* ViewModelVC.swift */,
+				84151EC522E443C500AD89CF /* ViewModelEVC.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -158,7 +158,6 @@
 			files = (
 				8410587222DB128000A7A44C /* LaunchScreen.storyboard in Resources */,
 				8410586F22DB128000A7A44C /* Assets.xcassets in Resources */,
-				8410586A22DB128000A7A44C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +170,7 @@
 			files = (
 				8410587C22DB17F600A7A44C /* TableViewCell.swift in Sources */,
 				8410587E22DB469400A7A44C /* Profile.swift in Sources */,
+				84151EC622E443C500AD89CF /* ViewModelEVC.swift in Sources */,
 				8410587A22DB12AF00A7A44C /* EditViewController.swift in Sources */,
 				8410588422DB515B00A7A44C /* EditTableViewCell.swift in Sources */,
 				8410586722DB128000A7A44C /* ViewController.swift in Sources */,
@@ -183,14 +183,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8410586822DB128000A7A44C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8410586922DB128000A7A44C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8410587022DB128000A7A44C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

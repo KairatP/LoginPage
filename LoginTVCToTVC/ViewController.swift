@@ -12,25 +12,24 @@ protocol ViewControlledTaskDelegate {
     func sendTask(userName: String, password: String)
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewControlledTaskDelegate {
     
     let tableView = UITableView()
     private let cellId = "CellId"
     
-    var delegate: ViewControlledTaskDelegate?
     let viewModel = ViewModelVC()
+    let evc = EditViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         settingsTableView()
+        receiveInfoFromClosure()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(loginButtonAction))
     }
     
     func settingsTableView() {
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -41,10 +40,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.frame = CGRect(x: 25, y: 250, width: 350, height: 100)
     }
     
+    func receiveInfoFromClosure() {
+        evc.sendTextClosure = { userText, pswText in
+            self.viewModel.profile?.userText = userText
+            self.viewModel.profile?.passwordText = pswText
+            self.tableView.reloadData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if viewModel.isTextExist == false {
-//            return 0
-//        }
         return 2
     }
     
@@ -52,22 +56,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableViewCell
         
         if indexPath.row == 0 {
-            cell.userLabel.text = "\(viewModel.profile!.userText)"
-            cell.label.text = "User name:"
+            cell.inputs(name: "UserName", textInput: viewModel.profile!.userText)
         } else {
-            cell.userLabel.text = "\(viewModel.profile!.passwordText)"
-            cell.label.text = "Password"
+            cell.inputs(name: "Password", textInput: viewModel.profile!.passwordText)
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    @objc func loginButtonAction() {
+        evc.delegate = self
+        present(evc, animated: true, completion: nil)
+        // variant with navigationController
+//        navigationController?.pushViewController(evc, animated: true)
     }
     
-    @objc func loginButtonAction() {
-        
-        self.navigationController?.pushViewController(EditViewController(), animated: true)
+    func sendTask(userName: String, password: String) {
+        viewModel.profile?.userText = userName
+        viewModel.profile?.passwordText = password
+        tableView.reloadData()
     }
 }
 
